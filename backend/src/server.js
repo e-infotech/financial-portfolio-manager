@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes (to be implemented)
-// app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 // app.use('/api/portfolio', require('./routes/portfolioRoutes'));
 // app.use('/api/stocks', require('./routes/stockRoutes'));
 
