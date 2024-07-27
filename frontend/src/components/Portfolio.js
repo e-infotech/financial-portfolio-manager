@@ -8,6 +8,7 @@ function Portfolio() {
   const [shares, setShares] = useState('');
   const [purchasePrice, setPurchasePrice] = useState('');
   const [cash, setCash] = useState('');
+  const [realTimeData, setRealTimeData] = useState({});
 
   useEffect(() => {
     fetchPortfolio();
@@ -23,7 +24,28 @@ function Portfolio() {
       console.error('Error fetching portfolio:', error);
     }
   };
+   
+  useEffect(() => {
+    if (portfolio) {
+      fetchRealTimeData();
+    }
+  }, [portfolio]);
 
+  const fetchRealTimeData = async () => {
+    const data = {};
+    for (const stock of portfolio.stocks) {
+      try {
+        const response = await axios.get(`/api/stocks/quote/${stock.symbol}`, {
+          headers: { 'x-auth-token': localStorage.getItem('token') }
+        });
+        data[stock.symbol] = response.data;
+      } catch (error) {
+        console.error(`Error fetching data for ${stock.symbol}:`, error);
+      }
+    }
+    setRealTimeData(data);
+  };
+  
   const addStock = async (e) => {
     e.preventDefault();
     try {
@@ -65,6 +87,13 @@ function Portfolio() {
         {portfolio.stocks.map((stock, index) => (
           <li key={index}>
             {stock.symbol} - Shares: {stock.shares}, Purchase Price: ${stock.purchasePrice}
+            {realTimeData[stock.symbol] && (
+              <span>
+                , Current Price: ${realTimeData[stock.symbol].price}
+                ({realTimeData[stock.symbol].changePercent > 0 ? '+' : ''}
+                {realTimeData[stock.symbol].changePercent}%)
+              </span>
+            )}
           </li>
         ))}
       </ul>
