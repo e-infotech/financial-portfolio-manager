@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PortfolioVisualization from './PortfolioVisualization';
 
 function Portfolio() {
   const [portfolio, setPortfolio] = useState(null);
@@ -67,7 +68,7 @@ function Portfolio() {
           </li>
         ))}
       </ul>
-
+      <PortfolioVisualization portfolio={portfolio} />
       <h3>Add Stock</h3>
       <form onSubmit={addStock}>
         <input
