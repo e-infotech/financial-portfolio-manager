@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -26,6 +27,15 @@ router.post('/login', async (req, res) => {
     res.json({ token });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
