@@ -1,0 +1,39 @@
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-section {
+  flex: 1 1 300px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.dashboard h1 {
+  width: 100%;
+}
+
+.dashboard-actions a {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-section {
+    flex: 1 1 100%;
+  }
+
+  .dashboard-actions a {
+    display: block;
+    margin-right: 0;
+  }
+}
