@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PortfolioVisualization from './PortfolioVisualization';
+import './Dashboard.css';
 
 function Dashboard() {
   const [user, setUser] = useState(null);
