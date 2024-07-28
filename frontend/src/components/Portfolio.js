@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PortfolioVisualization from './PortfolioVisualization';
+import './Portfolio.css';
 
 function Portfolio() {
   const [portfolio, setPortfolio] = useState(null);
@@ -79,13 +80,13 @@ function Portfolio() {
   if (!portfolio) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="portfolio">
       <h2>Your Portfolio</h2>
       <h3>Cash: ${portfolio.cash}</h3>
       <h3>Stocks:</h3>
-      <ul>
+      <ul className="portfolio-stocks">
         {portfolio.stocks.map((stock, index) => (
-          <li key={index}>
+          <li key={index} className="portfolio-stock-item">
             {stock.symbol} - Shares: {stock.shares}, Purchase Price: ${stock.purchasePrice}
             {realTimeData[stock.symbol] && (
               <span>
@@ -99,7 +100,7 @@ function Portfolio() {
       </ul>
       <PortfolioVisualization portfolio={portfolio} />
       <h3>Add Stock</h3>
-      <form onSubmit={addStock}>
+      <form onSubmit={addStock} className="add-stock-form">
         <input
           type="text"
           placeholder="Symbol"
