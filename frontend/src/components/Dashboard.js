@@ -45,28 +45,27 @@ function Dashboard() {
     <div className="dashboard">
       <h1>Welcome, {user.username}!</h1>
       
-      <div className="dashboard-summary">
+      <div className="dashboard-section dashboard-summary">
         <h2>Portfolio Summary</h2>
         <p>Total Value: ${portfolio.cash + portfolio.stocks.reduce((sum, stock) => sum + stock.shares * stock.purchasePrice, 0)}</p>
         <p>Cash Balance: ${portfolio.cash}</p>
         <p>Number of Stocks: {portfolio.stocks.length}</p>
       </div>
 
-      <div className="dashboard-actions">
+      <div className="dashboard-section dashboard-actions">
         <h2>Quick Actions</h2>
         <Link to="/portfolio">Manage Portfolio</Link>
         <Link to="/trade">Trade Stocks</Link>
         <Link to="/analyze">Analyze Market</Link>
       </div>
 
-      <div className="dashboard-visualization">
+      <div className="dashboard-section dashboard-visualization">
         <h2>Portfolio Visualization</h2>
         <PortfolioVisualization portfolio={portfolio} />
       </div>
 
-      <div className="dashboard-recent-activity">
+      <div className="dashboard-section dashboard-recent-activity">
         <h2>Recent Activity</h2>
-        {/* You would need to implement an API endpoint for recent activities */}
         <ul>
           <li>Bought 10 shares of AAPL</li>
           <li>Sold 5 shares of GOOGL</li>
@@ -74,9 +73,8 @@ function Dashboard() {
         </ul>
       </div>
 
-      <div className="dashboard-market-overview">
+      <div className="dashboard-section dashboard-market-overview">
         <h2>Market Overview</h2>
-        {/* You would need to implement an API endpoint for market data */}
         <p>S&P 500: +0.5%</p>
         <p>NASDAQ: -0.2%</p>
         <p>DOW: +0.3%</p>
